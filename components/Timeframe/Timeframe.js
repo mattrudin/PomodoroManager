@@ -1,17 +1,25 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TextInput, View } from 'react-native';
 
-const Timeframe = (props) => {
-  let text = props.text;
-  let containerBackground = props.break ? styles.containerBreak : styles.containerWork;
+class Timeframe extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    let text = this.props.text;
+    let containerBackground = this.props.break ? styles.containerBreak : styles.containerWork;
 
-  return (
-    <View style={containerBackground}>
-      <Text style={styles.startTime}>12:00</Text>
-      <Text style={styles.endTime}>12:25</Text>
-      <Text style={styles.description}>{text}</Text>
-    </View>
-  );
+    return (
+      <View style={containerBackground}>
+        <Text style={styles.startTime}>12:00</Text>
+        <Text style={styles.endTime}>12:25</Text>
+        <TextInput 
+          type="text" 
+          className="search" 
+          placeholder={this.props.break ? 'Break' : ''} />
+      </View>
+    );  
+  }
 }
 
 
@@ -22,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 30,
     width: 300,
-    backgroundColor: '#38c172',
+    backgroundColor: '#04986b',
     borderRadius: 5,
     elevation: 5,
     margin: 5
@@ -34,7 +42,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 30,
     width: 300,
-    backgroundColor: '#f6993f',
+    backgroundColor: '#d3c786',
     borderRadius: 5,
     elevation: 5,
     margin: 5
