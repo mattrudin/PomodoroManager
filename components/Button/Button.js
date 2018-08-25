@@ -3,8 +3,10 @@ import { StyleSheet, Text, View } from 'react-native';
 
 const Button = props =>{
 	return(
-		<View style={styles.container}>
-			<Text>+</Text>
+		<View 
+			style={styles.container}
+			onPress={props.touch} >
+			<Text style={styles.text}>{props.text}</Text>
 		</View>
 	)
 }
@@ -15,10 +17,14 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 50,
     width: 50,
-    backgroundColor: '#D5D5D5',
+    backgroundColor: '#C9C9C9',
     borderRadius: 25,
     elevation: 5,
     margin: 5
+  },
+
+  text: {
+  	fontSize: 30
   }
 });
 

@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Timer from './components/Timer/Timer';
 import Timeframe from './components/Timeframe/Timeframe';
 import Button from './components/Button/Button';
+import TimerInput from './components/TimerInput/TimerInput';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,8 +12,12 @@ class App extends React.Component {
       break: 1,
       time: 300,
       minutes: '',
-      seconds: ''
+      seconds: '',
+      framesArray: [0,1,0]
     }
+    this.handleInput = this.handleInput.bind(this);
+    this.addFrame = this.addFrame.bind(this);
+    this.removeFrame = this.removeFrame.bind(this);
   }
   
   componentDidMount() {
@@ -39,6 +44,12 @@ class App extends React.Component {
     });
   };
 
+  handleInput(number) {
+    this.setState({
+      time: parseInt(number) 
+    });
+  };
+
   addLeadingZeros(value) {
     value = String(value);
     while (value.length < 2) {
@@ -47,23 +58,40 @@ class App extends React.Component {
     return value;
   }
 
+  addFrame() {
+    this.setState({
+      framesArray: [...this.state.framesArray, 1, 0]
+    })
+  }
+
+  removeFrame() {
+    this.setState({
+      framesArray: this.state.framesArray.slice(0,-2)
+    })
+  }
+
   render() {
+    const timeFrames = this.state.framesArray.map(frame => {
+      return <Timeframe break={frame}/>
+    })
+
     return (
       <View style={styles.container}>
         <Timer 
             minutes={this.state.minutes}
             seconds={this.state.seconds} />
+        <TimerInput
+          input={this.handleInput} />
         <View>
-          <Timeframe text={'Doing stuff'} break={0}/>
-          <Timeframe text={'Short break'} break={this.state.break}/>
-          <Timeframe text={'Doing stuff'} break={0}/>
-          <Timeframe text={'Short break'} break={this.state.break}/>
-          <Timeframe text={'Doing stuff'} break={0}/>
-          <Timeframe text={'Short break'} break={this.state.break}/>
-          <Timeframe text={'Doing stuff'} break={0}/>
+          {timeFrames}
         </View>
         <View style={styles.button}>
-          <Button />
+          <Button 
+            text={'-'}
+            touch={this.removeFrame} />
+          <Button 
+            text={'+'}
+            touch={this.addFrame} />
         </View>
       </View>
     );
@@ -75,10 +103,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-around',
     alignItems: 'center',
-    backgroundColor: '#f1f5f8'
+    backgroundColor: '#FAF3EB'
   },
 
   button: {
+    display: 'flex',
+    flexDirection: 'row',
     marginLeft: 'auto',
     marginRight: 30
   }
