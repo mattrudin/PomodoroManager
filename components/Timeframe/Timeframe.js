@@ -2,8 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 const Timeframe = props => {
-  let text = props.text;
-  let containerBackground = props.break ? '#d3c786' : '#04986b';
+  const text = props.text;
+  const time = props.time;
+  const containerBackground = props.break ? '#d3c786' : '#04986b';
 
   return (
     <View style={[styles.container, {backgroundColor: containerBackground}]}>

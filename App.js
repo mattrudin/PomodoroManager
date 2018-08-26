@@ -9,10 +9,9 @@ class App extends React.Component {
     this.state = {
       break: 1,
       time: 300,
-      start: 0,
-      now: 0,
       minutes: '',
       seconds: '',
+      startTime: '',
       framesArray: [0,1,0]
     }
 
@@ -22,6 +21,11 @@ class App extends React.Component {
   }
   
   start() {
+    const time = new Date();
+    const startTime = `${time.getHours()}:${time.getMinutes()}`;
+    this.setState({
+      startTime: startTime
+    })
     this.timerID = setInterval(
       () => this.tick(),
       1000
@@ -29,6 +33,11 @@ class App extends React.Component {
   }
 
   tick() {
+    /*if(this.state.time === 0) {
+      start sound
+    } else {
+
+    }*/
     this.toMinutesSeconds();
     currentValue = this.state.time;
     this.setState({
@@ -67,7 +76,11 @@ class App extends React.Component {
 
   render() {
     const timeFrames = this.state.framesArray.map((frame, index) => {
-      return <Timeframe break={frame} key={index} />
+      return <Timeframe 
+                break={frame} 
+                key={index}
+                time={this.state.time}
+                start={this.state.time} />
     })
     let { minutes, seconds } = this.state;
 
@@ -75,16 +88,18 @@ class App extends React.Component {
       <View style={styles.container}>
         <Button 
           title={`${minutes}:${seconds}`}
-          titleStyle={styles.buttonTimerText}
+          fontSize={40}
           buttonStyle={styles.buttonTimer} 
           onPress={this.start} />
         <View style={styles.buttonRow}>
           <Button 
             title={'-'}
+            fontSize={20}
             onPress={this.removeFrame} 
             buttonStyle={styles.button} />
           <Button 
             title={'+'}
+            fontSize={20}
             onPress={this.addFrame}
             buttonStyle={styles.button} />
         </View>
@@ -130,10 +145,6 @@ const styles = StyleSheet.create({
     borderRadius: 75,
     elevation:10,
     padding: 5,
-  },
-
-  buttonTimerText: {
-    fontSize: 40,
   },
 
   scrollView: {
