@@ -8,6 +8,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       break: 1,
+      start: 0,
       time: 300,
       minutes: '',
       seconds: '',
@@ -21,9 +22,11 @@ class App extends React.Component {
   }
   
   start() {
+    if(this.state.start) return; 
     const time = new Date();
     const startTime = `${time.getHours()}:${time.getMinutes()}`;
     this.setState({
+      start: 1,
       startTime: startTime
     })
     this.timerID = setInterval(
@@ -82,12 +85,12 @@ class App extends React.Component {
                 time={this.state.time}
                 start={this.state.time} />
     })
-    let { minutes, seconds } = this.state;
+    let { minutes, seconds, start } = this.state;
 
     return (
       <View style={styles.container}>
         <Button 
-          title={`${minutes}:${seconds}`}
+          title={start ? `${minutes}:${seconds}` : `START`}
           fontSize={40}
           buttonStyle={styles.buttonTimer} 
           onPress={this.start} />
