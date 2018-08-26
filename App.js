@@ -1,9 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Timer from './components/Timer/Timer';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Button } from 'react-native-elements'
 import Timeframe from './components/Timeframe/Timeframe';
-import Button from './components/Button/Button';
-import TimerInput from './components/TimerInput/TimerInput';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,21 +9,24 @@ class App extends React.Component {
     this.state = {
       break: 1,
       time: 300,
+      start: 0,
+      now: 0,
       minutes: '',
       seconds: '',
       framesArray: [0,1,0]
     }
-    this.handleInput = this.handleInput.bind(this);
+
     this.addFrame = this.addFrame.bind(this);
     this.removeFrame = this.removeFrame.bind(this);
+    this.start = this.start.bind(this);
   }
   
-  componentDidMount() {
+  start() {
     this.timerID = setInterval(
       () => this.tick(),
       1000
     );
-  };
+  }
 
   tick() {
     this.toMinutesSeconds();
@@ -41,12 +42,6 @@ class App extends React.Component {
     this.setState({
       minutes: this.addLeadingZeros(minutes),
       seconds: this.addLeadingZeros(seconds)
-    });
-  };
-
-  handleInput(number) {
-    this.setState({
-      time: parseInt(number) 
     });
   };
 
@@ -71,47 +66,80 @@ class App extends React.Component {
   }
 
   render() {
-    const timeFrames = this.state.framesArray.map(frame => {
-      return <Timeframe break={frame}/>
+    const timeFrames = this.state.framesArray.map((frame, index) => {
+      return <Timeframe break={frame} key={index} />
     })
+    let { minutes, seconds } = this.state;
 
     return (
       <View style={styles.container}>
-        <Timer 
-            minutes={this.state.minutes}
-            seconds={this.state.seconds} />
-        <TimerInput
-          input={this.handleInput} />
-        <View>
+        <Button 
+          title={`${minutes}:${seconds}`}
+          titleStyle={styles.buttonTimerText}
+          buttonStyle={styles.buttonTimer} 
+          onPress={this.start} />
+        <View style={styles.buttonRow}>
+          <Button 
+            title={'-'}
+            onPress={this.removeFrame} 
+            buttonStyle={styles.button} />
+          <Button 
+            title={'+'}
+            onPress={this.addFrame}
+            buttonStyle={styles.button} />
+        </View>
+        <ScrollView style={styles.scrollView} >
           {timeFrames}
-        </View>
-        <View style={styles.button}>
-          <Button 
-            text={'-'}
-            touch={this.removeFrame} />
-          <Button 
-            text={'+'}
-            touch={this.addFrame} />
-        </View>
+        </ScrollView>
       </View>
     );
   }
 }
 
+
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-around',
+    paddingTop: 40,
     alignItems: 'center',
-    backgroundColor: '#FAF3EB'
+    backgroundColor: '#FAF3EB',
+  },
+
+  buttonRow: {
+    display: 'flex',
+    flexDirection: 'row',
+    paddingTop: 10,
   },
 
   button: {
-    display: 'flex',
-    flexDirection: 'row',
-    marginLeft: 'auto',
-    marginRight: 30
+    height: 50,
+    width: 50,
+    backgroundColor: '#C9C9C9',
+    borderRadius: 25,
+    elevation: 5,
+    margin: 5,
+  },
+
+  buttonTimer: {
+    width: 150,
+    height: 150,
+    backgroundColor: '#568DBA',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 75,
+    elevation:10,
+    padding: 5,
+  },
+
+  buttonTimerText: {
+    fontSize: 40,
+  },
+
+  scrollView: {
+    marginTop: 10,
   }
+
 });
 
 export default App;
