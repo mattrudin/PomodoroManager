@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
 
-const Settings = (props) => {
+const SettingsScreen = (props) => {
 	return(
 		<View style={styles.container}>
 	      <Text>settings screen</Text>
@@ -19,4 +19,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Settings;
+export default SettingsScreen;

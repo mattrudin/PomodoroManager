@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 
 const Timeframe = props => {
+  const text = props.text;
+  const time = props.time;
   const containerBackground = props.break ? '#d3c786' : '#04986b';
 
   return (
@@ -10,7 +12,8 @@ const Timeframe = props => {
       <Text style={styles.endTime}>12:25</Text>
       <TextInput 
         type="text" 
-        className="search" />
+        className="search" 
+        placeholder={props.break ? 'Break' : ''} />
     </View>
   );  
 }
