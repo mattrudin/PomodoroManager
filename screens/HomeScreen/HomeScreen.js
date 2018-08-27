@@ -1,9 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
-import Timeframe from './components/Timeframe/Timeframe';
+import Timeframe from '../../components/Timeframe/Timeframe';
 
-class App extends React.Component {
+class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -84,7 +84,7 @@ class App extends React.Component {
   }
 
   render() {
-  const timeFrames = this.state.framesArray.map((frame, index) => {
+	const timeFrames = this.state.framesArray.map((frame, index) => {
       return <Timeframe 
                 break={frame} 
                 key={index}
@@ -93,8 +93,8 @@ class App extends React.Component {
     })
     let { minutes, seconds, start } = this.state;
 
-  return(
-    <View style={styles.container}>
+	return(
+		<View style={styles.container}>
         <Button 
           title={start ? `${minutes}:${seconds}` : `START`}
           fontSize={40}
@@ -160,4 +160,4 @@ const styles = StyleSheet.create({
 
 });
 
-export default App;
+export default HomeScreen;
