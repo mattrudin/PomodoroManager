@@ -1,4 +1,12 @@
-import { START_TIMER, RESTART_TIMER, ADD_SECOND, ADD_FRAME, REMOVE_FRAME } from './types';
+import { 	START_TIMER, 
+			RESTART_TIMER, 
+			ADD_SECOND, 
+			ADD_FRAME, 
+			REMOVE_FRAME, 
+			SET_WORK_DURATION, 
+			SET_SHORT_BREAK_DURATION, 
+			SET_LONG_BREAK_DURATION 
+		}	from './types';
 
 const TIMER_DURATION = 1500;
 
@@ -8,12 +16,13 @@ const initialState = {
 	isPlaying: false,
 	elapsedTime: 0,
 	timerDuration: TIMER_DURATION,
-	framesArray: [0,1,0]
+	framesArray: [0,1,0],
+	workDuration: 1500,
+	shortBreakDuration: 300,
+	longBreakDuration: 900
 };
 
-
 // Helper Functions
-	// No.1: Starts the timer
 const applyStartTimer = (state) => {
 	return {
 		...state,
@@ -21,7 +30,6 @@ const applyStartTimer = (state) => {
 	};
 }
 
-	// No.2: Stop the timer and sets default state
 const applyRestartTimer = (state) => {
 	return {
 		...state,
@@ -31,7 +39,6 @@ const applyRestartTimer = (state) => {
 	};
 }
 
-	// No.3: If true, it adds an additional second, else return default state and stops timer
 const applyAddSecond = (state) => {
 	if (state.elapsedTime < TIMER_DURATION) {
 		return {
@@ -65,6 +72,27 @@ const removeFrame = (state) => {
 	  		framesArray: state.framesArray.slice(0, -2)
 	  	};
   	}
+}
+
+const setWorkDuration = (state) => {
+	return {
+		...state,
+		workDuration: TIMER_DURATION
+	};
+}
+
+const setShortBreakDuration = (state) => {
+	return {
+		...state,
+		shortBreakDuration: TIMER_DURATION
+	};
+}
+
+const setLongBreakDuration = (state) => {
+	return {
+		...state,
+		longBreakDuration: TIMER_DURATION
+	};
 }
 
 // Reducer Function
