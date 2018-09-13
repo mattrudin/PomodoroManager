@@ -20,6 +20,8 @@ Tags: *Android*, *react*, *react-native*, *redux*
 ### react-native
 
 ### redux
+#### Tutorials
+[How to integrate Redux into your application with React Native and Expo](https://medium.freecodecamp.org/how-to-integrate-redux-into-your-application-with-react-native-and-expo-ec37c9ca6033)  
 #### Basics
 [Getting started with redux](https://egghead.io/courses/getting-started-with-redux)  
 [Understanding redux](http://www.youhavetolearncomputers.com/blog/2015/9/15/a-conceptual-overview-of-redux-or-how-i-fell-in-love-with-a-javascript-state-container)  

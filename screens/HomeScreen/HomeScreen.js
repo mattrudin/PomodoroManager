@@ -1,115 +1,65 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Button } from 'react-native-elements';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreators as actions } from '../../components/Store/actions';
 import TimeFrame from '../../components/Timeframe/Timeframe';
+import { formatTime } from '../../components/Utilities/utils';
 
 class HomeScreen extends React.Component {
-	constructor(props) {
-    super(props);
-    this.state = {
-      break: 1,
-      start: 0,
-      time: 300,
-      workDuration: 1500,
-      breakDuration: 300,
-      minutes: '',
-      seconds: '',
-      startTime: '',
-      framesArray: [0,1,0]
-    }
-
-    this.addFrame = this.addFrame.bind(this);
-    this.removeFrame = this.removeFrame.bind(this);
-    this.start = this.start.bind(this);
-	}
-	  
-	start() {
-	  if(this.state.start) return; 
-	  const time = new Date();
-	  const startTime = `${time.getHours()}:${time.getMinutes()}`;
-	  this.setState({
-	    start: 1,
-	    startTime: startTime
-	  })
-	  this.timerID = setInterval(
-	  () => this.tick(),
-	    1000
-	  );
-	}
-
-	tick() {
-	  if(this.state.time === 0) {
-	    const { breakDuration } = this.state;
-	    this.setState({
-	      start: 0,
-	      time: breakDuration
-	    })
-	  } else {
-	    this.toMinutesSeconds();
-	    currentValue = this.state.time;
-	    this.setState({
-	      time: currentValue - 1
-	    })
-	  }
-	};
-
-	toMinutesSeconds() {
-	  let minutes = Math.floor(this.state.time / 60);
-	  let seconds = this.state.time % 60;
-	  this.setState({
-	    minutes: this.addLeadingZeros(minutes),
-	    seconds: this.addLeadingZeros(seconds)
-	  });
-	};
-
-	addLeadingZeros(value) {
-	  value = String(value);
-	  while (value.length < 2) {
-	    value = '0' + value;
-	  }
-	  return value;
-	}
-
-	addFrame() {
-	  this.setState({
-	    framesArray: [...this.state.framesArray, 1, 0]
-	  })
-	}
-
-	removeFrame() {
-	  if (this.state.framesArray.length <= 1) return;
-	  this.setState({
-	    framesArray: this.state.framesArray.slice(0,-2)
-	  })
+	componentWillReceiveProps(nextProps) {
+		const currentProps = this.props;
+		if (!currentProps.isPlaying && nextProps.isPlaying) {
+			const timerInterval = setInterval(() => {
+				currentProps.addSecond();
+			}, 1000);
+			this.setState({
+				timerInterval
+			});
+		} else if (currentProps.isPlaying && !nextProps.isPlaying) {
+			clearInterval(this.state.timerInterval);
+		}
 	}
 
 	render() {
-		const timeFrames = this.state.framesArray.map((frame, index) => {
+
+		const { isPlaying, elapsedTime, timerDuration, framesArray, startTimer, restartTimer, addFrame, removeFrame } = this.props;
+
+		const startStopButton = isPlaying ? 	<Button
+													//iconName='stop-circle'
+													title={`${formatTime(timerDuration - elapsedTime)}`}
+													fontSize={40}
+													buttonStyle={styles.buttonTimer}
+													onPress={restartTimer}
+												/> :
+												<Button
+													//iconName='play-circle'
+													title={`START`}
+													fontSize={40}
+													buttonStyle={styles.buttonTimer}
+													onPress={startTimer}
+												/>
+
+		const timeFrames = framesArray.map((frame, index) => {
 	      return <TimeFrame 
 	                break={frame} 
-	                key={index}
-	                time={this.state.time}
-	                start={this.state.time} />
+	                key={index} />
 	    })
-	    let { minutes, seconds, start } = this.state;
 
 		return(
 			<View style={styles.container}>
-		        <Button 
-		          title={start ? `${minutes}:${seconds}` : `START`}
-		          fontSize={40}
-		          buttonStyle={styles.buttonTimer} 
-		          onPress={this.start} />
+		        {startStopButton}
 		        <View style={styles.buttonRow}>
 		          <Button 
 		            title={'-'}
 		            fontSize={20}
-		            onPress={this.removeFrame} 
+		            onPress={removeFrame} 
 		            buttonStyle={styles.button} />
 		          <Button 
 		            title={'+'}
 		            fontSize={20}
-		            onPress={this.addFrame}
+		            onPress={addFrame}
 		            buttonStyle={styles.button} />
 		        </View>
 		        <ScrollView style={styles.scrollView} >
@@ -160,4 +110,24 @@ const styles = StyleSheet.create({
 
 });
 
-export default HomeScreen;
+const mapStateToProps = (state) => {
+	const { isPlaying, elapsedTime, timerDuration, framesArray } = state;
+	return {
+		isPlaying,
+		elapsedTime,
+		timerDuration,
+		framesArray
+	};
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		startTimer: bindActionCreators(actions.startTimer, dispatch),
+		restartTimer: bindActionCreators(actions.restartTimer, dispatch),
+		addSecond: bindActionCreators(actions.addSecond, dispatch),
+		addFrame: bindActionCreators(actions.addFrame, dispatch),
+		removeFrame: bindActionCreators(actions.removeFrame, dispatch)
+	};
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
