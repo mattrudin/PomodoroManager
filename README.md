@@ -18,7 +18,9 @@ Tags: *Android*, *react*, *react-native*, *redux*
 
 ## 2. Lessons learned
 ### react-native
-
+#### Forms in React Native
+[React Native Documentation about forms](https://react-native-training.github.io/react-native-elements/docs/0.19.0/forms.html)  
+[Easily Build Forms in React Native](https://medium.com/react-native-development/easily-build-forms-in-react-native-9006fcd2a73b)  
 ### redux
 #### Tutorials
 [How to integrate Redux into your application with React Native and Expo](https://medium.freecodecamp.org/how-to-integrate-redux-into-your-application-with-react-native-and-expo-ec37c9ca6033)  
