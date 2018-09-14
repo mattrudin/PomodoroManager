@@ -110,6 +110,7 @@ const styles = StyleSheet.create({
 
 });
 
+//Input from store
 const mapStateToProps = (state) => {
 	const { isPlaying, elapsedTime, timerDuration, framesArray } = state;
 	return {
@@ -120,6 +121,7 @@ const mapStateToProps = (state) => {
 	};
 }
 
+//Output to store
 const mapDispatchToProps = (dispatch) => {
 	return {
 		startTimer: bindActionCreators(actions.startTimer, dispatch),

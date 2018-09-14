@@ -7,6 +7,7 @@ const TimerInput = props => {
 		<View style={styles.container}>
 			<Text>{text}</Text>
 			<TextInput 
+				style={{width: '90%'}}
 				type="number" />
 		</View>
 	);
