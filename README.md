@@ -36,6 +36,6 @@ Tags: *Android*, *react*, *react-native*, *redux*
 [Object.assign() vs. spread operator](https://medium.com/@corinnemariekelly/object-assign-vs-spread-operator-577c889dbadc)   
 
 #### Future articles
-[You Probably Don’t Need Redux](https://medium.com/@blairanderson/you-probably-dont-need-redux-1b404204a07f)
+[You Probably Don’t Need Redux](https://medium.com/@blairanderson/you-probably-dont-need-redux-1b404204a07f)  
 [Redux By Example](https://medium.com/front-end-hacking/redux-by-example-part-1-4afca1b7bd58)  
 [How to Reduce Action Boilerplate](https://blog.angularindepth.com/how-to-reduce-action-boilerplate-90dc3d389e2b)  

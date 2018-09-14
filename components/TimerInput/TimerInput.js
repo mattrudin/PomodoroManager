@@ -3,12 +3,15 @@ import { StyleSheet, Text, TextInput,View } from 'react-native';
 
 const TimerInput = props => {
 	const text = props.text;
+	const onChangeText = props.onChangeText;
+
 	return(
 		<View style={styles.container}>
 			<Text>{text}</Text>
 			<TextInput 
 				style={{width: '90%'}}
-				type="number" />
+				type="number"
+				onChangeText={onChangeText} />
 		</View>
 	);
 };
