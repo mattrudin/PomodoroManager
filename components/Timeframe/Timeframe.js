@@ -9,6 +9,11 @@ const Timeframe = props => {
       <Text style={styles.startTime}>12:00</Text>
       <Text style={styles.endTime}>12:25</Text>
       <TextInput 
+        style={{width: '60%'}}
+        placeholder="What needs to be done?"
+        underlineColorAndroid="transparent"
+        underlineColor="transparent"
+        autoCorrect={false}
         type="text" 
         className="search" />
     </View>

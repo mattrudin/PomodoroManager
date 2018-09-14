@@ -74,7 +74,7 @@ const removeFrame = (state) => {
   	}
 }
 
-const setWorkDuration = (state) => {
+/*const setWorkDuration = (state) => {
 	return {
 		...state,
 		workDuration: TIMER_DURATION
@@ -93,7 +93,7 @@ const setLongBreakDuration = (state) => {
 		...state,
 		longBreakDuration: TIMER_DURATION
 	};
-}
+}*/
 
 // Reducer Function
 const reducer = (state = initialState, action) => {
@@ -108,6 +108,21 @@ const reducer = (state = initialState, action) => {
 			return addFrame(state);
 		case REMOVE_FRAME:
 			return removeFrame(state);
+		case SET_WORK_DURATION:
+			return {
+				...state,
+				workDuration: action.duration
+			};
+		case SET_SHORT_BREAK_DURATION:
+			return {
+				...state,
+				shortBreakDuration: action.duration
+			};
+		case SET_LONG_BREAK_DURATION:
+			return {
+				...state,
+				longBreakDuration: action.duration
+			};
 		default:
 			return state;
 	}

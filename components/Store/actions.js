@@ -38,21 +38,24 @@ const removeFrame = () => {
 	};
 }
 
-const setWorkDuration = () => {
+const setWorkDuration = (duration) => {
 	return {
-		type: SET_WORK_DURATION
+		type: SET_WORK_DURATION,
+		duration
 	};
 }
 
-const setShortBreakDuration = () => {
+const setShortBreakDuration = (duration) => {
 	return {
-		type: SET_SHORT_BREAK_DURATION
+		type: SET_SHORT_BREAK_DURATION,
+		duration
 	};
 }
 
-const setLongBreakDuration = () => {
+const setLongBreakDuration = (duration) => {
 	return {
-		type: SET_LONG_BREAK_DURATION
+		type: SET_LONG_BREAK_DURATION,
+		duration
 	};
 }
 
