@@ -1,27 +1,23 @@
-const primaryBackground = '#FAF3EB';
-const primaryButtonTimer = '#568DBA';
-const primaryWork = '#04986b';
-const primaryBreak = '#d3c786';
-const primaryHighlighter = '#83478B';
-const primaryPlaceholderTextColor = '#fff';
-const blackThemeBackground = '#050c14';
-const blackThemeButtonTimer = '#a87244';
-const blackThemeWork = '#fa6794';
-const blackThemeBreak = '#2d387a';
-const blackThemeHighlighter = '#0cc6db';
-const blackThemePlaceholderTextColor = '#000';
+const defaultTheme = {
+	backgroundColor: '#FAF3EB',
+	buttonColor: '#568DBA',
+	workColor: '#04986b',
+	breakColor: '#d3c786',
+	highlighterColor: '#83478B',
+	placeholderTextColor: '#fff'
+};
+
+const darkTheme = {
+	backgroundColor: '#050c14',
+	buttonColor: '#a87244',
+	workColor: '#fa6794',
+	breakColor: '#2d387a',
+	highlighterColor: '#0cc6db',
+	placeholderTextColor: '#000'
+};
+
 
 export {
-	primaryBackground,
-	primaryButtonTimer,
-	primaryWork,
-	primaryBreak,
-	primaryHighlighter,
-	primaryPlaceholderTextColor,
-	blackThemeBackground,
-	blackThemeButtonTimer,
-	blackThemeWork,
-	blackThemeBreak,
-	blackThemeHighlighter,
-	blackThemePlaceholderTextColor,
+	defaultTheme,
+	darkTheme
 };
