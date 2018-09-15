@@ -5,7 +5,8 @@ import { 	START_TIMER,
 			REMOVE_FRAME, 
 			SET_WORK_DURATION, 
 			SET_SHORT_BREAK_DURATION, 
-			SET_LONG_BREAK_DURATION 
+			SET_LONG_BREAK_DURATION,
+			CHANGE_PRIMARY_COLOR
 		}	from './types';
 
 const TIMER_DURATION = 1500;
@@ -19,14 +20,22 @@ const initialState = {
 	framesArray: [0,1,0],
 	workDuration: 1500,
 	shortBreakDuration: 300,
-	longBreakDuration: 900
+	longBreakDuration: 900,
+	numberOfTimeframe: -1,
+	backgroundColor: '#FAF3EB',
+	buttonColor: '#568DBA',
+	workColor: '#04986b',
+	breakColor: '#d3c786',
+	highlighterColor: '#83478B',
+	placeholderTextColor: '#fff'
 };
 
 // Helper Functions
 const applyStartTimer = (state) => {
 	return {
 		...state,
-		isPlaying: true
+		isPlaying: true,
+		numberOfTimeframe: state.numberOfTimeframe + 1
 	};
 }
 
@@ -122,6 +131,11 @@ const reducer = (state = initialState, action) => {
 			return {
 				...state,
 				longBreakDuration: action.duration
+			};
+		case CHANGE_PRIMARY_COLOR:
+			return {
+				...state,
+				primaryColor: action.color
 			};
 		default:
 			return state;

@@ -5,7 +5,8 @@ import { 	START_TIMER,
 			REMOVE_FRAME, 
 			SET_WORK_DURATION, 
 			SET_SHORT_BREAK_DURATION, 
-			SET_LONG_BREAK_DURATION 
+			SET_LONG_BREAK_DURATION,
+			CHANGE_PRIMARY_COLOR
 		} from './types';
 
 const startTimer = () => {
@@ -59,6 +60,11 @@ const setLongBreakDuration = (duration) => {
 	};
 }
 
+const changePrimaryColor = (color) => ({
+	type: CHANGE_PRIMARY_COLOR,
+	color
+});
+
 const actionCreators = {
 	startTimer,
 	restartTimer,
@@ -67,7 +73,8 @@ const actionCreators = {
 	removeFrame,
 	setWorkDuration,
 	setShortBreakDuration,
-	setLongBreakDuration
+	setLongBreakDuration,
+	changePrimaryColor
 };
 
 export { actionCreators };

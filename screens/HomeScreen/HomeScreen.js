@@ -24,17 +24,15 @@ class HomeScreen extends React.Component {
 
 	render() {
 
-		const { isPlaying, elapsedTime, timerDuration, framesArray, startTimer, restartTimer, addFrame, removeFrame } = this.props;
+		const { isPlaying, elapsedTime, timerDuration, framesArray, startTimer, restartTimer, addFrame, removeFrame, numberOfTimeframe } = this.props;
 
 		const startStopButton = isPlaying ? 	<Button
-													//iconName='stop-circle'
 													title={`${formatTime(timerDuration - elapsedTime)}`}
 													fontSize={40}
 													buttonStyle={styles.buttonTimer}
 													onPress={restartTimer}
 												/> :
 												<Button
-													//iconName='play-circle'
 													title={`START`}
 													fontSize={40}
 													buttonStyle={styles.buttonTimer}
@@ -43,7 +41,8 @@ class HomeScreen extends React.Component {
 
 		const timeFrames = framesArray.map((frame, index) => {
 	      return <TimeFrame 
-	                break={frame} 
+	                break={frame}
+	                isActive={index == numberOfTimeframe ? 1 : 0} 
 	                key={index} />
 	    })
 
@@ -112,12 +111,13 @@ const styles = StyleSheet.create({
 
 //Input from store
 const mapStateToProps = (state) => {
-	const { isPlaying, elapsedTime, timerDuration, framesArray } = state;
+	const { isPlaying, elapsedTime, timerDuration, framesArray, numberOfTimeframe } = state;
 	return {
 		isPlaying,
 		elapsedTime,
 		timerDuration,
-		framesArray
+		framesArray,
+		numberOfTimeframe
 	};
 }
 
