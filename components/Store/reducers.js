@@ -135,7 +135,7 @@ const reducer = (state = initialState, action) => {
 		case CHANGE_PRIMARY_COLOR:
 			return {
 				...state,
-				primaryColor: action.color
+				...action.color
 			};
 		default:
 			return state;

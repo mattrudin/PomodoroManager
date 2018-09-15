@@ -47,7 +47,7 @@ class HomeScreen extends React.Component {
 	    })
 
 		return(
-			<View style={styles.container}>
+			<View style={[styles.container, {backgroundColor: this.props.backgroundColor}]}>
 		        {startStopButton}
 		        <View style={styles.buttonRow}>
 		          <Button 
@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingTop: 40,
     alignItems: 'center',
-    backgroundColor: '#FAF3EB',
   },
 
   buttonRow: {
@@ -111,13 +110,15 @@ const styles = StyleSheet.create({
 
 //Input from store
 const mapStateToProps = (state) => {
-	const { isPlaying, elapsedTime, timerDuration, framesArray, numberOfTimeframe } = state;
+	const { isPlaying, elapsedTime, timerDuration, framesArray, numberOfTimeframe, backgroundColor, buttonColor } = state;
 	return {
 		isPlaying,
 		elapsedTime,
 		timerDuration,
 		framesArray,
-		numberOfTimeframe
+		numberOfTimeframe,
+		backgroundColor,
+		buttonColor
 	};
 }
 
