@@ -4,17 +4,7 @@ import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { FontAwesome } from '@expo/vector-icons';
-import {
-	startTimer,
-	restartTimer,
-	addSecond,
-	addFrame,
-	removeFrame,
-	setWorkDuration,
-	setShortBreakDuration,
-	setLongBreakDuration,
-	changePrimaryColor
-} from '../../components/Store/actions';
+import { actionCreators as actions } from '../../components/Store/actions';
 import TimeFrame from '../../components/Timeframe/Timeframe';
 import { formatTime } from '../../components/Utilities/utils';
 
@@ -39,7 +29,7 @@ class Home extends React.Component {
 
 	render() {
 
-		const { isPlaying, elapsedTime, timerDuration, framesArray, startTimer, restartTimer, addFrame, removeFrame, numberOfTimeframe } = this.props;
+		const { isPlaying, elapsedTime, timerDuration, framesArray, startTimer, restartTimer, addFrame, removeFrame, numberOfTimeframe, backgroundColor } = this.props;
 
 		const startStopButton = isPlaying ? 	<TouchableOpacity
 													style={[styles.buttonTimer, {backgroundColor: this.props.buttonColor}]}
@@ -52,28 +42,28 @@ class Home extends React.Component {
 													<Text style={styles.textTimer}>START</Text>
 												</TouchableOpacity>
 
-/*		const timeFrames = framesArray.map((frame, index) => {
+		const timeFrames = framesArray.map((frame, index) => {
 	      return <TimeFrame 
 	                break={frame}
 	                isActive={index == numberOfTimeframe ? 1 : 0} 
 	                key={index} />
-	    })*/
+	    })
 
 		return(
 			<View style={[styles.container, {backgroundColor: this.props.backgroundColor}]}>
-			{startStopButton}
-	        <View style={styles.buttonRow}>
-	        	<TouchableOpacity 
+		        {startStopButton}
+		        <View style={styles.buttonRow}>
+		        	<TouchableOpacity 
 			            onPress={removeFrame} 
 			            style={styles.button}>
 			        	<Text style={styles.text} >-</Text>
-			    </TouchableOpacity>
-		        <TouchableOpacity 
+			        </TouchableOpacity>
+		        	<TouchableOpacity 
 			            onPress={addFrame} 
 			            style={styles.button}>
 			        	<Text style={styles.text} >+</Text>
 			        </TouchableOpacity>
-	        	<TouchableOpacity
+		        	<TouchableOpacity
 						style={styles.button}
 						onPress={this.handleSettingsPress} >
 						<FontAwesome 
@@ -82,9 +72,9 @@ class Home extends React.Component {
 							color='#568DBA' /> 
 					</TouchableOpacity>
 		        </View>
-		       	{/*<ScrollView style={styles.scrollView} >
+		        <ScrollView style={styles.scrollView} >
 		          {timeFrames}
-		        </ScrollView>*/}
+		        </ScrollView>
 		    </View>
 		);
 	}
@@ -138,26 +128,30 @@ const styles = StyleSheet.create({
 
 });
 
+//Input from store
 const mapStateToProps = (state) => {
-	const { isPlaying, elapsedTime, timerDuration, framesArray, numberOfTimeframe } = state;
+	const { isPlaying, elapsedTime, timerDuration, framesArray, numberOfTimeframe, backgroundColor, buttonColor } = state;
 	return {
 		isPlaying,
 		elapsedTime,
 		timerDuration,
 		framesArray,
 		numberOfTimeframe,
-		backgroundColor: state.theme.backgroundColor,
-		buttonColor: state.theme.buttonColor
+		backgroundColor,
+		buttonColor
 	};
-};
+}
 
-const mapDispatchToProps = {
-		startTimer,
-		restartTimer,
-		addSecond,
-		addFrame,
-		removeFrame,
-		changePrimaryColor
+//Output to store
+const mapDispatchToProps = (dispatch) => {
+	return {
+		startTimer: bindActionCreators(actions.startTimer, dispatch),
+		restartTimer: bindActionCreators(actions.restartTimer, dispatch),
+		addSecond: bindActionCreators(actions.addSecond, dispatch),
+		addFrame: bindActionCreators(actions.addFrame, dispatch),
+		removeFrame: bindActionCreators(actions.removeFrame, dispatch),
+		changePrimaryColor: bindActionCreators(actions.changePrimaryColor, dispatch)
 	};
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

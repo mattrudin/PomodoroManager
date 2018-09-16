@@ -67,7 +67,7 @@ const changePrimaryColor = (color) => {
 	};
 }
 
-export {
+const actionCreators = {
 	startTimer,
 	restartTimer,
 	addSecond,
@@ -78,3 +78,5 @@ export {
 	setLongBreakDuration,
 	changePrimaryColor
 };
+
+export { actionCreators };
