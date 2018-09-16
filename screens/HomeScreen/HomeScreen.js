@@ -24,18 +24,18 @@ class HomeScreen extends React.Component {
 
 	render() {
 
-		const { isPlaying, elapsedTime, timerDuration, framesArray, startTimer, restartTimer, addFrame, removeFrame, numberOfTimeframe } = this.props;
+		const { isPlaying, elapsedTime, timerDuration, framesArray, startTimer, restartTimer, addFrame, removeFrame, numberOfTimeframe, backgroundColor } = this.props;
 
 		const startStopButton = isPlaying ? 	<Button
 													title={`${formatTime(timerDuration - elapsedTime)}`}
 													fontSize={40}
-													buttonStyle={styles.buttonTimer}
+													buttonStyle={[styles.buttonTimer, {backgroundColor: this.props.buttonColor}]}
 													onPress={restartTimer}
 												/> :
 												<Button
 													title={`START`}
 													fontSize={40}
-													buttonStyle={styles.buttonTimer}
+													buttonStyle={[styles.buttonTimer, {backgroundColor: this.props.buttonColor}]}
 													onPress={startTimer}
 												/>
 
@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
   buttonTimer: {
     width: 150,
     height: 150,
-    backgroundColor: '#568DBA',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 75,
@@ -129,7 +128,8 @@ const mapDispatchToProps = (dispatch) => {
 		restartTimer: bindActionCreators(actions.restartTimer, dispatch),
 		addSecond: bindActionCreators(actions.addSecond, dispatch),
 		addFrame: bindActionCreators(actions.addFrame, dispatch),
-		removeFrame: bindActionCreators(actions.removeFrame, dispatch)
+		removeFrame: bindActionCreators(actions.removeFrame, dispatch),
+		changePrimaryColor: bindActionCreators(actions.changePrimaryColor, dispatch)
 	};
 }
 

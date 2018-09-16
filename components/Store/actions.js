@@ -60,10 +60,12 @@ const setLongBreakDuration = (duration) => {
 	};
 }
 
-const changePrimaryColor = (color) => ({
-	type: CHANGE_PRIMARY_COLOR,
-	color
-});
+const changePrimaryColor = (color) => {
+	return {
+		type: CHANGE_PRIMARY_COLOR,
+		color
+	};
+}
 
 const actionCreators = {
 	startTimer,
