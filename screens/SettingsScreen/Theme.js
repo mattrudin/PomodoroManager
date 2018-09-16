@@ -6,7 +6,7 @@ import TimerInput from '../../components/TimerInput/TimerInput';
 import { setWorkDuration, setShortBreakDuration, setLongBreakDuration, changePrimaryColor } from '../../components/Store/actions';
 import { defaultTheme, darkTheme } from '../../components/Utilities/colors';
 
-class SettingsScreen extends React.Component {
+class Theme extends React.Component {
   handleWorkChange = (duration) => {
     this.props.dispatch(setWorkDuration(duration));
   };
@@ -18,6 +18,7 @@ class SettingsScreen extends React.Component {
   };
   handleThemeChange = (color) => {
     this.props.dispatch(changePrimaryColor(color));
+    this.props.navigation.goBack();
   };
   render () {
   	return(
@@ -81,4 +82,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default connect()(SettingsScreen);
+export default connect()(Theme);
