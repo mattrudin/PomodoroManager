@@ -1,13 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { FontAwesome } from '@expo/vector-icons';
 import { actionCreators as actions } from '../../components/Store/actions';
 import TimeFrame from '../../components/Timeframe/Timeframe';
 import { formatTime } from '../../components/Utilities/utils';
 
-class HomeScreen extends React.Component {
+class Home extends React.Component {
 	componentWillReceiveProps(nextProps) {
 		const currentProps = this.props;
 		if (!currentProps.isPlaying && nextProps.isPlaying) {
@@ -20,24 +21,26 @@ class HomeScreen extends React.Component {
 		} else if (currentProps.isPlaying && !nextProps.isPlaying) {
 			clearInterval(this.state.timerInterval);
 		}
-	}
+	};
+
+	handleSettingsPress = () => {
+		this.props.navigation.navigate('Theme', { title: 'Settings'});
+	};
 
 	render() {
 
 		const { isPlaying, elapsedTime, timerDuration, framesArray, startTimer, restartTimer, addFrame, removeFrame, numberOfTimeframe, backgroundColor } = this.props;
 
-		const startStopButton = isPlaying ? 	<Button
-													title={`${formatTime(timerDuration - elapsedTime)}`}
-													fontSize={40}
-													buttonStyle={[styles.buttonTimer, {backgroundColor: this.props.buttonColor}]}
-													onPress={restartTimer}
-												/> :
-												<Button
-													title={`START`}
-													fontSize={40}
-													buttonStyle={[styles.buttonTimer, {backgroundColor: this.props.buttonColor}]}
-													onPress={startTimer}
-												/>
+		const startStopButton = isPlaying ? 	<TouchableOpacity
+													style={[styles.buttonTimer, {backgroundColor: this.props.buttonColor}]}
+													onPress={restartTimer} >
+													<Text style={styles.textTimer} >{formatTime(timerDuration - elapsedTime)}</Text>
+												</TouchableOpacity> :
+												<TouchableOpacity
+													style={[styles.buttonTimer, {backgroundColor: this.props.buttonColor}]}
+													onPress={startTimer} >
+													<Text style={styles.textTimer}>START</Text>
+												</TouchableOpacity>
 
 		const timeFrames = framesArray.map((frame, index) => {
 	      return <TimeFrame 
@@ -50,16 +53,24 @@ class HomeScreen extends React.Component {
 			<View style={[styles.container, {backgroundColor: this.props.backgroundColor}]}>
 		        {startStopButton}
 		        <View style={styles.buttonRow}>
-		          <Button 
-		            title={'-'}
-		            fontSize={20}
-		            onPress={removeFrame} 
-		            buttonStyle={styles.button} />
-		          <Button 
-		            title={'+'}
-		            fontSize={20}
-		            onPress={addFrame}
-		            buttonStyle={styles.button} />
+		        	<TouchableOpacity 
+			            onPress={removeFrame} 
+			            style={styles.button}>
+			        	<Text style={styles.text} >-</Text>
+			        </TouchableOpacity>
+		        	<TouchableOpacity 
+			            onPress={addFrame} 
+			            style={styles.button}>
+			        	<Text style={styles.text} >+</Text>
+			        </TouchableOpacity>
+		        	<TouchableOpacity
+						style={styles.button}
+						onPress={this.handleSettingsPress} >
+						<FontAwesome 
+							name='gear'
+							size={24}
+							color='#568DBA' /> 
+					</TouchableOpacity>
 		        </View>
 		        <ScrollView style={styles.scrollView} >
 		          {timeFrames}
@@ -89,6 +100,8 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     elevation: 5,
     margin: 5,
+    alignItems: 'center',
+  	justifyContent: 'center'
   },
 
   buttonTimer: {
@@ -103,6 +116,14 @@ const styles = StyleSheet.create({
 
   scrollView: {
     marginTop: 10,
+  },
+  text: {
+  	fontSize: 20,
+  	color: '#fff'
+  },
+  textTimer: {
+  	fontSize: 40,
+  	color: '#fff'
   }
 
 });
@@ -133,4 +154,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
