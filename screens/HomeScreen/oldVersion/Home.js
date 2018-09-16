@@ -29,9 +29,9 @@ class Home extends React.Component {
 
 	render() {
 
-//		const { isPlaying, elapsedTime, timerDuration, framesArray, startTimer, restartTimer, addFrame, removeFrame, numberOfTimeframe, backgroundColor } = this.props;
+		const { isPlaying, elapsedTime, timerDuration, framesArray, startTimer, restartTimer, addFrame, removeFrame, numberOfTimeframe, backgroundColor } = this.props;
 
-/*		const startStopButton = isPlaying ? 	<TouchableOpacity
+		const startStopButton = isPlaying ? 	<TouchableOpacity
 													style={[styles.buttonTimer, {backgroundColor: this.props.buttonColor}]}
 													onPress={restartTimer} >
 													<Text style={styles.textTimer} >{formatTime(timerDuration - elapsedTime)}</Text>
@@ -41,18 +41,29 @@ class Home extends React.Component {
 													onPress={startTimer} >
 													<Text style={styles.textTimer}>START</Text>
 												</TouchableOpacity>
-*/
-/*		const timeFrames = framesArray.map((frame, index) => {
+
+		const timeFrames = framesArray.map((frame, index) => {
 	      return <TimeFrame 
 	                break={frame}
 	                isActive={index == numberOfTimeframe ? 1 : 0} 
 	                key={index} />
 	    })
-*/
+
 		return(
 			<View style={[styles.container, {backgroundColor: this.props.backgroundColor}]}>
-	        <View style={styles.buttonRow}>
-	        	<TouchableOpacity
+		        {startStopButton}
+		        <View style={styles.buttonRow}>
+		        	<TouchableOpacity 
+			            onPress={removeFrame} 
+			            style={styles.button}>
+			        	<Text style={styles.text} >-</Text>
+			        </TouchableOpacity>
+		        	<TouchableOpacity 
+			            onPress={addFrame} 
+			            style={styles.button}>
+			        	<Text style={styles.text} >+</Text>
+			        </TouchableOpacity>
+		        	<TouchableOpacity
 						style={styles.button}
 						onPress={this.handleSettingsPress} >
 						<FontAwesome 
@@ -61,6 +72,9 @@ class Home extends React.Component {
 							color='#568DBA' /> 
 					</TouchableOpacity>
 		        </View>
+		        <ScrollView style={styles.scrollView} >
+		          {timeFrames}
+		        </ScrollView>
 		    </View>
 		);
 	}
@@ -115,7 +129,7 @@ const styles = StyleSheet.create({
 });
 
 //Input from store
-/*const mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
 	const { isPlaying, elapsedTime, timerDuration, framesArray, numberOfTimeframe, backgroundColor, buttonColor } = state;
 	return {
 		isPlaying,
@@ -140,41 +154,4 @@ const mapDispatchToProps = (dispatch) => {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);*/
-
-const mapStateToProps = (state) => {
-	return {
-		backgroundColor: state.theme.backgroundColor
-	};
-};
-
-export default connect(mapStateToProps)(Home);
-
-/*		return(
-			<View style={[styles.container, {backgroundColor: this.props.backgroundColor}]}>
-			    {startStopButton}
-	        	<View style={styles.buttonRow}>
-	        		<TouchableOpacity 
-			            onPress={removeFrame} 
-			            style={styles.button}>
-			        	<Text style={styles.text} >-</Text>
-			        </TouchableOpacity>
-		        	<TouchableOpacity 
-			            onPress={addFrame} 
-			            style={styles.button}>
-			        	<Text style={styles.text} >+</Text>
-			        </TouchableOpacity>
-		        	<TouchableOpacity
-						style={styles.button}
-						onPress={this.handleSettingsPress} >
-						<FontAwesome 
-							name='gear'
-							size={24}
-							color='#568DBA' /> 
-					</TouchableOpacity>
-		        </View>
-		        <ScrollView style={styles.scrollView} >
-		          {timeFrames}
-		        </ScrollView>
-		    </View>
-		);*/
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

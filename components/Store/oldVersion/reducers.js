@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import { 	START_TIMER, 
 			RESTART_TIMER, 
 			ADD_SECOND, 
@@ -106,7 +105,7 @@ const setLongBreakDuration = (state) => {
 }*/
 
 // Reducer Function
-/*const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case START_TIMER:
 			return applyStartTimer(state);
@@ -143,20 +142,4 @@ const setLongBreakDuration = (state) => {
 	}
 }
 
-export default reducer;*/
-
-const theme = (state = initialState, action) => {
-	switch (action.type) {
-		case CHANGE_PRIMARY_COLOR:
-			return {
-				...state,
-				backgroundColor: action.color
-			};
-		default:
-			return state;
-	}
-};
-
-export default combineReducers({
-	theme
-});
+export default reducer;

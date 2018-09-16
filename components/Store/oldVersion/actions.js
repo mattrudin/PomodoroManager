@@ -66,7 +66,7 @@ const changePrimaryColor = (color) => {
 		color
 	};
 }
-/*
+
 const actionCreators = {
 	startTimer,
 	restartTimer,
@@ -79,5 +79,4 @@ const actionCreators = {
 	changePrimaryColor
 };
 
-export { actionCreators };*/
-export { changePrimaryColor };
+export { actionCreators };
