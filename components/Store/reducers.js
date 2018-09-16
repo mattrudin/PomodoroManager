@@ -106,7 +106,7 @@ const setLongBreakDuration = (state) => {
 }*/
 
 // Reducer Function
-/*const reducer = (state = initialState, action) => {
+const theme = (state = initialState, action) => {
 	switch (action.type) {
 		case START_TIMER:
 			return applyStartTimer(state);
@@ -136,16 +136,16 @@ const setLongBreakDuration = (state) => {
 		case CHANGE_PRIMARY_COLOR:
 			return {
 				...state,
-				backgroundColor: action.color
+				...action.color
 			};
 		default:
 			return state;
 	}
 }
 
-export default reducer;*/
+//export default reducer;
 
-const theme = (state = initialState, action) => {
+/*const theme = (state = initialState, action) => {
 	switch (action.type) {
 		case CHANGE_PRIMARY_COLOR:
 			return {
@@ -155,7 +155,7 @@ const theme = (state = initialState, action) => {
 		default:
 			return state;
 	}
-};
+};*/
 
 export default combineReducers({
 	theme

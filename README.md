@@ -41,6 +41,8 @@ Tags: *Android*, *react*, *react-native*, *redux*
 
 #### mapStateToProps() & mapDispatchToProps()
 [Redux’s Mysterious Connect Function](https://medium.com/mofed/reduxs-mysterious-connect-function-526efe1122e4)  
+[5 Ways to Connect Redux Actions](https://blog.benestudio.co/5-ways-to-connect-redux-actions-3f56af4009c8)  
+[mapStateToProps, and why you may not need mapDispatchToProps when you start Redux](https://medium.com/ovrsea/mapstatetoprops-and-why-you-may-not-need-mapdispatchtoprops-as-a-beginner-dd012a3da5e6)  
 
 #### Future articles
 [You Probably Don’t Need Redux](https://medium.com/@blairanderson/you-probably-dont-need-redux-1b404204a07f)  
