@@ -3,6 +3,8 @@ Pomodoro Time and Manager for Android
 
 Tags: *Android*, *react*, *react-native*, *redux*
 
+![Default Theme](https://github.com/mattrudin/PomodoroManager/blob/master/pictures/DefaultTheme.jpg)
+![Dark Theme](https://github.com/mattrudin/PomodoroManager/blob/master/pictures/DarkTheme.jpg)  
 
 ## Index
 
@@ -13,7 +15,7 @@ Tags: *Android*, *react*, *react-native*, *redux*
 
 
 ## 1. Instructions
-
+Simple Pomodoro clock with additional timeframe manager and dark theme.
 
 
 ## 2. Lessons learned
