@@ -7,15 +7,6 @@ import { setWorkDuration, setShortBreakDuration, setLongBreakDuration, changePri
 import { defaultTheme, darkTheme } from '../../components/Utilities/colors';
 
 class Theme extends React.Component {
-/*  handleWorkChange = (duration) => {
-    this.props.dispatch(setWorkDuration(duration));
-  };
-  handleShortBreakChange = (duration) => {
-    this.props.dispatch(setShortBreakDuration(duration));
-  };
-  handleLongBreakChange = (duration) => {
-    this.props.dispatch(setLongBreakDuration(duration));
-  };*/
   handleThemeChange = (color) => {
     this.props.dispatch(changePrimaryColor(color));
     this.props.navigation.goBack();
