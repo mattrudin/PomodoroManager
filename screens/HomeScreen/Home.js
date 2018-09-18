@@ -13,7 +13,6 @@ import {
 	setWorkDuration,
 	setShortBreakDuration,
 	setLongBreakDuration,
-	changePrimaryColor
 } from '../../components/Store/actions';
 import TimeFrame from '../../components/Timeframe/Timeframe';
 import { formatTime } from '../../components/Utilities/utils';
@@ -33,43 +32,59 @@ class Home extends React.Component {
 		}
 	};
 
+	startTimer = () => {
+	  this.props.dispatch({ type: 'START_TIMER' });
+	};
+
+	restartTimer = () => {
+	  this.props.dispatch({ type: 'RESTART_TIMER' });
+	};
+
+	removeFrame = () => {
+		this.props.dispatch({ type: 'REMOVE_FRAME' });
+	};
+
+	addFrame = () => {
+		this.props.dispatch({ type: 'ADD_FRAME' });
+	};
+
 	handleSettingsPress = () => {
 		this.props.navigation.navigate('Theme', { title: 'Settings'});
 	};
 
-	render() {
 
-		const { isPlaying, elapsedTime, timerDuration, framesArray, startTimer, restartTimer, addFrame, removeFrame, numberOfTimeframe } = this.props;
+	render() {
+		const { isPlaying, elapsedTime, timerDuration, framesArray, startTimer, restartTimer, addFrame, removeFrame, numberOfTimeframe, backgroundColor, buttonColor } = this.props;
 
 		const startStopButton = isPlaying ? 	<TouchableOpacity
-													style={[styles.buttonTimer, {backgroundColor: this.props.buttonColor}]}
-													onPress={restartTimer} >
+													style={[styles.buttonTimer, {backgroundColor: buttonColor}]}
+													onPress={this.restartTimer} >
 													<Text style={styles.textTimer} >{formatTime(timerDuration - elapsedTime)}</Text>
 												</TouchableOpacity> :
 												<TouchableOpacity
-													style={[styles.buttonTimer, {backgroundColor: this.props.buttonColor}]}
-													onPress={startTimer} >
+													style={[styles.buttonTimer, {backgroundColor: buttonColor}]}
+													onPress={this.startTimer} >
 													<Text style={styles.textTimer}>START</Text>
 												</TouchableOpacity>
 
-/*		const timeFrames = framesArray.map((frame, index) => {
+		const timeFrames = this.props.framesArray.map((frame, index) => {
 	      return <TimeFrame 
 	                break={frame}
 	                isActive={index == numberOfTimeframe ? 1 : 0} 
 	                key={index} />
-	    })*/
+	    })
 
 		return(
-			<View style={[styles.container, {backgroundColor: this.props.backgroundColor}]}>
+			<View style={[styles.container, {backgroundColor: backgroundColor}]}>
 			{startStopButton}
 	        <View style={styles.buttonRow}>
 	        	<TouchableOpacity 
-			            onPress={removeFrame} 
+			            onPress={this.removeFrame} 
 			            style={styles.button}>
 			        	<Text style={styles.text} >-</Text>
 			    </TouchableOpacity>
 		        <TouchableOpacity 
-			            onPress={addFrame} 
+			            onPress={this.addFrame} 
 			            style={styles.button}>
 			        	<Text style={styles.text} >+</Text>
 			        </TouchableOpacity>
@@ -139,25 +154,15 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-	const { isPlaying, elapsedTime, timerDuration, framesArray, numberOfTimeframe } = state;
 	return {
-		isPlaying,
-		elapsedTime,
-		timerDuration,
-		framesArray,
-		numberOfTimeframe,
+		isPlaying: state.isPlaying,
+		elapsedTime: state.elapsedTime,
+		timerDuration: state.timerDuration,
+		framesArray: state.framesArray,
+		numberOfTimeframe: state.numberOfTimeframe,
 		backgroundColor: state.theme.backgroundColor,
 		buttonColor: state.theme.buttonColor
 	};
 };
 
-const mapDispatchToProps = {
-		startTimer,
-		restartTimer,
-		addSecond,
-		addFrame,
-		removeFrame,
-		changePrimaryColor
-	};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps)(Home);
