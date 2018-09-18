@@ -1,17 +1,4 @@
-import { combineReducers } from 'redux';
-import { 	START_TIMER, 
-			RESTART_TIMER, 
-			ADD_SECOND, 
-			ADD_FRAME, 
-			REMOVE_FRAME, 
-			SET_WORK_DURATION, 
-			SET_SHORT_BREAK_DURATION, 
-			SET_LONG_BREAK_DURATION,
-			CHANGE_PRIMARY_COLOR
-		}	from './types';
-
 const TIMER_DURATION = 1500;
-
 
 // Initial State
 const initialState = {
@@ -32,23 +19,6 @@ const initialState = {
 };
 
 // Helper Functions
-/*const applyStartTimer = (state) => {
-	return {
-		...state,
-		isPlaying: true,
-		numberOfTimeframe: state.numberOfTimeframe + 1
-	};
-}*/
-
-/*const applyRestartTimer = (state) => {
-	return {
-		...state,
-		isPlaying: false,
-		elapsedTime: 0,
-		timerDuration: TIMER_DURATION
-	};
-}*/
-
 const addSecond = (state) => {
 	if (state.elapsedTime < TIMER_DURATION) {
 		return {
@@ -62,13 +32,6 @@ const addSecond = (state) => {
 		};
 	}
 }
-
-/*const addFrame = (state) => {
-	return {
-		...state,
-		framesArray: [...state.framesArray, 1, 0]
-	};
-}*/
 
 const removeFrame = (state) => {
   	if (state.framesArray.length <= 1) {
@@ -84,29 +47,8 @@ const removeFrame = (state) => {
   	}
 }
 
-/*const setWorkDuration = (state) => {
-	return {
-		...state,
-		workDuration: TIMER_DURATION
-	};
-}
-
-const setShortBreakDuration = (state) => {
-	return {
-		...state,
-		shortBreakDuration: TIMER_DURATION
-	};
-}
-
-const setLongBreakDuration = (state) => {
-	return {
-		...state,
-		longBreakDuration: TIMER_DURATION
-	};
-}*/
-
 // Reducer Function
-const theme = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case 'START_TIMER':
 			return {
@@ -121,7 +63,7 @@ const theme = (state = initialState, action) => {
 				elapsedTime: 0,
 				timerDuration: TIMER_DURATION
 			};
-		case ADD_SECOND:
+		case 'ADD_SECOND':
 			return addSecond(state);
 		case 'ADD_FRAME':
 			return {
@@ -130,7 +72,7 @@ const theme = (state = initialState, action) => {
 			};
 		case 'REMOVE_FRAME':
 			return removeFrame(state);
-		case CHANGE_PRIMARY_COLOR:
+		case 'CHANGE_PRIMARY_COLOR':
 			return {
 				...state,
 				...action.color
@@ -139,7 +81,3 @@ const theme = (state = initialState, action) => {
 			return state;
 	}
 }
-
-export default combineReducers({
-	theme
-});

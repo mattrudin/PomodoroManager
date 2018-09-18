@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, TextInput, TouchableHighlight } fro
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import TimerInput from '../../components/TimerInput/TimerInput';
-import { setWorkDuration, setShortBreakDuration, setLongBreakDuration, changePrimaryColor } from '../../components/Store/actions';
+import { changePrimaryColor } from '../../components/Store/actions';
 import { defaultTheme, darkTheme } from '../../components/Utilities/colors';
 
 class Theme extends React.Component {
@@ -11,6 +11,7 @@ class Theme extends React.Component {
     this.props.dispatch(changePrimaryColor(color));
     this.props.navigation.goBack();
   };
+  
   render () {
   	return(
   		<View style={styles.container}>
