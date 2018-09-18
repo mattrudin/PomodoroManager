@@ -3,7 +3,7 @@ Pomodoro Time and Manager for Android
 
 Tags: *Android*, *react*, *react-native*, *redux*
 
-![Themes](https://github.com/mattrudin/PomodoroManager/blob/master/pictures/Themes.jpg)
+![Themes](https://github.com/mattrudin/PomodoroManager/blob/master/pictures/Themes.png)
 
 ## Index
 
