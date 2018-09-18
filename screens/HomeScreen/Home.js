@@ -2,18 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { FontAwesome } from '@expo/vector-icons';
-import {
-	startTimer,
-	restartTimer,
-	addSecond,
-	addFrame,
-	removeFrame,
-	setWorkDuration,
-	setShortBreakDuration,
-	setLongBreakDuration,
-} from '../../components/Store/actions';
 import TimeFrame from '../../components/Timeframe/Timeframe';
 import { formatTime } from '../../components/Utilities/utils';
 
@@ -54,7 +43,7 @@ class Home extends React.Component {
 
 
 	render() {
-		const { isPlaying, elapsedTime, timerDuration, framesArray, startTimer, restartTimer, addFrame, removeFrame, numberOfTimeframe, backgroundColor, buttonColor } = this.props;
+		const { isPlaying, elapsedTime, timerDuration, framesArray, startTimer, restartTimer, addFrame, removeFrame, numberOfTimeframe, backgroundColor, buttonColor, workColor, breakColor, highlighterColor, placeholderTextColor } = this.props;
 
 		const startStopButton = isPlaying ? 	<TouchableOpacity
 													style={[styles.buttonTimer, {backgroundColor: buttonColor}]}
@@ -71,7 +60,11 @@ class Home extends React.Component {
 	      return <TimeFrame 
 	                break={frame}
 	                isActive={index == numberOfTimeframe ? 1 : 0} 
-	                key={index} />
+	                key={index} 
+	                workColor={workColor}
+	                breakColor={breakColor}
+	                highlighterColor={highlighterColor}
+	                placeholderTextColor={placeholderTextColor} />
 	    })
 
 		return(
@@ -97,9 +90,9 @@ class Home extends React.Component {
 							color='#568DBA' /> 
 					</TouchableOpacity>
 		        </View>
-		       	{/*<ScrollView style={styles.scrollView} >
+		       	<ScrollView style={styles.scrollView} >
 		          {timeFrames}
-		        </ScrollView>*/}
+		        </ScrollView>
 		    </View>
 		);
 	}
@@ -160,8 +153,12 @@ const mapStateToProps = (state) => {
 		timerDuration: state.timerDuration,
 		framesArray: state.framesArray,
 		numberOfTimeframe: state.numberOfTimeframe,
-		backgroundColor: state.theme.backgroundColor,
-		buttonColor: state.theme.buttonColor
+		backgroundColor: state.backgroundColor,
+		buttonColor: state.buttonColor,
+		workColor: state.workColor,
+		breakColor: state.breakColor,
+		highlighterColor: state.highlighterColor,
+		placeholderTextColor: state.placeholderTextColor
 	};
 };
 
