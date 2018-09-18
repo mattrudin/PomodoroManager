@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-nati
 import { Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { FontAwesome } from '@expo/vector-icons';
+import { bindActionCreators } from 'redux';
 import TimeFrame from '../../components/Timeframe/Timeframe';
 import { formatTime } from '../../components/Utilities/utils';
 
@@ -11,7 +12,7 @@ class Home extends React.Component {
 		const currentProps = this.props;
 		if (!currentProps.isPlaying && nextProps.isPlaying) {
 			const timerInterval = setInterval(() => {
-				currentProps.addSecond();
+				this.addSecond();
 			}, 1000);
 			this.setState({
 				timerInterval
@@ -27,6 +28,10 @@ class Home extends React.Component {
 
 	restartTimer = () => {
 	  this.props.dispatch({ type: 'RESTART_TIMER' });
+	};
+
+	addSecond = () => {
+		this.props.dispatch({ type: 'ADD_SECOND' });
 	};
 
 	removeFrame = () => {

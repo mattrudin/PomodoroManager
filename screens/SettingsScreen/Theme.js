@@ -15,18 +15,6 @@ class Theme extends React.Component {
   render () {
   	return(
   		<View style={styles.container}>
-          <View style={styles.duration}>
-            <Text style={styles.header}>Durations</Text>
-    	      <TimerInput 
-              text={'Duration of working frame'}
-              onChangeText={(duration) => this.handleWorkChange(duration)} />
-            <TimerInput 
-              text={'Duration of short break frame'}
-              onChangeText={(duration) => this.handleShortBreakChange(duration)} />
-            <TimerInput 
-              text={'Duration of long break frame'}
-              onChangeText={(duration) => this.handleLongBreakChange(duration)} />
-          </View>
           <View style={styles.themes}>
             <Text style={styles.header}>Available Themes</Text>
             <TouchableHighlight
@@ -52,9 +40,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     backgroundColor: '#FAF3EB',
   },
-  duration: {
-    marginTop: 5
-  },
   themes:{
     marginTop: 10
   },
@@ -67,6 +52,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    height: 30,
     marginTop: 5,
     borderStyle: 'solid',
     borderColor: '#000',

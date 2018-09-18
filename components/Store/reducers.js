@@ -1,4 +1,4 @@
-const TIMER_DURATION = 1500;
+export const TIMER_DURATION = 1500;
 
 // Initial State
 const initialState = {
